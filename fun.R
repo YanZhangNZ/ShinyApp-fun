@@ -1,5 +1,5 @@
 library(shiny)
 
-ui <- fluidPage()
+ui <- fluidPage("Hello World")
 server <- function(input,output){}
 shinyApp(ui = ui, server = server)
