@@ -8,5 +8,11 @@ ui <- fluidPage(
               ),
   plotOutput("hist")
 )
-server <- function(input,output){}
+
+server <- function(input,output){
+  output$hist <- renderPlot({
+    title <- input$num "random normal values"
+    hist(rnorm(input$num))})
+}
+
 shinyApp(ui = ui, server = server)
