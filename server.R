@@ -1,43 +1,23 @@
 library(shiny)
 data(iris) #load the iris dataset
 
-
-
 server <- function(input,output){
-  
-  #output$myname <- renderText(input$name)
-  #output$myemail <- renderText(input$email)
-  #output$mygender <- renderText(input$gender)
-  #output$myyear <- renderText(input$year)
-  #output$mystate <- renderText(input$statenames)
   
   #reactive
   colm <- reactive({
     as.character(input$variable)
   })
 
-  output$text1 <- renderText({
-    paste("Column name is", names(iris[colm()]))
-  })
-  
-  output$text2 <- renderText({
-    paste("Color of histogram is", input$color)
-  })
-  
-  output$text3 <- renderText({
-    paste("Number of histogram BINs is ", input$BINs)
-  })
-  
   output$myhist <- renderPlot(
     {
       hist(
         iris[,colm()],
-        
         col = input$color,
         )
     }
   )
   
+
   
   #render character
   output$str <- renderPrint({
@@ -49,4 +29,36 @@ server <- function(input,output){
     summary(iris)
   })
   
+  
+  #download plot
+  x <- reactive({
+    iris[,as.character(input$var1)]
+  })
+  y <- reactive({
+    iris[,as.character(input$var2)]
+  })
+  output$download <- renderPlot({
+    plot(x(),y())
+  })
+  #download handler
+  output$down <- downloadHandler(
+    filename = function(){
+      #iris.png
+      #iris.jpg
+      paste("iris",input$var3,sep=".")
+    },
+    content =function(file){
+      #open the device
+      # create the plot
+      #close the device
+      #png()
+      #pdf()
+      if(input$var3 == "png")
+        png(file)
+      else
+        pdf(file)
+      plot(x(),y())
+      dev.off()
+    }
+  )
 }
