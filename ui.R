@@ -1,5 +1,7 @@
 library(shiny)
 
+?sliderInput
+
 ui <- fluidPage(
   
   #title panel
@@ -9,10 +11,27 @@ ui <- fluidPage(
   sidebarLayout(
     
     #sidebar panel
-    sidebarPanel(h3("this is sidebar panel for input"),h5("widget5")),
+    sidebarPanel(
+      ("Enter your personal information"),
+      
+
+      textInput("name","Enter your name",""),
+      textInput("email","Enter your email",""),
+      radioButtons("gender","Select the gender",list("Male","Female"),""),
+      sliderInput("year","choose the year:",min=2000,max=2020,value=2018,step=5,animate = T),
+      selectInput("statenames","Select the state",c("California","New York","Texas")),
+      
+      ),
+
     
     #main panel
-    mainPanel(h4("this is main panel for output"),h5("this is h5"))
-    
-  )
+    mainPanel(
+      ("Personal Information"),
+      textOutput("myname"),
+      textOutput("myemail"),
+      textOutput("mygender"),
+      textOutput("myyear"),
+      textOutput("mystate")
+              )
+               )
 )
