@@ -26,21 +26,36 @@ ui <- fluidPage(
       selectInput("var1","Select the x Variable",c("Sepal.Length","Petal.Length")),
       selectInput("var2","Select the y Variable",c("Sepal.Width","Petal.Width")),
       radioButtons("var3","select download format",c("png","pdf"),selected="png"),
-                 ),
+                 
+      
+      
+      #download table
+      selectInput("dataset","Select dataset",c("iris","mtcars","trees")),
+      br(),
+      #HelpText("Select download format"),
+      radioButtons("format","Format type:",c("Excel","Text","DOC"),selected="Excel"),
+      br(),
+      #helpText("click on the download btton to downlod the dataset observation"),
+      downloadButton(outputId="button",label="Download file")
+      ),
 
     
     #main panel
     mainPanel(
       ("Personal Information"),
-
+      tableOutput("table"),
+     
       #tabset panel
       tabsetPanel(
         type="tab",
         tabPanel(("summary"),tableOutput("summary")),
         tabPanel("Structure",textOutput("str")),
         tabPanel(("Plot"),plotOutput("myhist")),
-        tabPanel(("plot2"),plotOutput("download"),
-                 downloadButton(outputId="down",label="download the plot")))
+        tabPanel(
+          ("plot2"),
+          plotOutput("download"),
+          downloadButton(outputId="down",label="download the plot"))
+        )
               )
     
     )

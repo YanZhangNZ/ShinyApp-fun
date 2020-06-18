@@ -1,5 +1,8 @@
 library(shiny)
 data(iris) #load the iris dataset
+data(mtcars)
+data(trees)
+
 
 server <- function(input,output){
   
@@ -61,4 +64,51 @@ server <- function(input,output){
       dev.off()
     }
   )
+  
+  
+  #download file
+  datasetInput <- reactive({
+    switch(input$dataset,
+           "iris" = head(iris),
+           "mtcars" = head(mtcars),
+           "trees" = head(trees)
+           )
+  })
+  
+  fileext <- reactive({
+    switch(input$format,
+           "Excel"="csv",
+           "Text"="txt",
+           "Doc"="doc"
+           )
+  })
+  
+  
+  output$table <- renderTable({
+    datasetInput()
+  })
+  
+  output$button <- downloadHandler(
+    #return a string which tells the client
+    #browser what name to use when saving the file
+    filename = function(){
+      #iris.png
+      #iris.jpg
+      paste(input$dataset,fileext(),sep=".")
+    },
+    #write data to a file given to it by 
+    #the argument 'file'
+    content =function(file){
+      #open the device
+      # create the plot
+      #close the device
+      sep <- switch(
+        input$format,"Excel"=",","Text"="\t","DOC"=" ")
+      
+      #write a rile specified by the 'file' argument
+      write.table(datasetInput(),file,sep=sep,row.names = FALSE)
+    }
+  )
+
+  
 }
