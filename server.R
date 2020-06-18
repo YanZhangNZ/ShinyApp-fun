@@ -1,0 +1,7 @@
+library(shiny)
+
+server <- function(input,output){
+  output$hist <- renderPlot({
+    title <- "100 random normal values"
+    hist(rnorm(100))})
+}
