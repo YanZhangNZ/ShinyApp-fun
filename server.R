@@ -5,16 +5,19 @@ data(iris) #load the iris dataset
 
 server <- function(input,output){
   
-  output$myname <- renderText(input$name)
-  output$myemail <- renderText(input$email)
-  output$mygender <- renderText(input$gender)
-  output$myyear <- renderText(input$year)
-  output$mystate <- renderText(input$statenames)
+  #output$myname <- renderText(input$name)
+  #output$myemail <- renderText(input$email)
+  #output$mygender <- renderText(input$gender)
+  #output$myyear <- renderText(input$year)
+  #output$mystate <- renderText(input$statenames)
   
-  #colm <- reactive({as.numeric(input$variable)})
-  
+  #reactive
+  colm <- reactive({
+    as.character(input$variable)
+  })
+
   output$text1 <- renderText({
-    paste("Data coloum is", input$variable)
+    paste("Column name is", names(iris[colm()]))
   })
   
   output$text2 <- renderText({
@@ -28,11 +31,22 @@ server <- function(input,output){
   output$myhist <- renderPlot(
     {
       hist(
-        iris[,input$variable],
+        iris[,colm()],
         
         col = input$color,
         )
     }
   )
+  
+  
+  #render character
+  output$str <- renderPrint({
+    str(iris)
+  })
+  
+  #render summary
+  output$summary <- renderPrint({
+    summary(iris)
+  })
   
 }

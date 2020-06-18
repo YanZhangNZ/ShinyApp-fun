@@ -18,11 +18,11 @@ ui <- fluidPage(
       ("Enter your personal information"),
       
 
-      textInput("name","Enter your name",""),
-      textInput("email","Enter your email",""),
-      radioButtons("gender","Select the gender",list("Male","Female"),""),
-      sliderInput("year","choose the year:",min=2000,max=2020,value=2018,step=5,animate = T),
-      selectInput("statenames","Select the state",c("California","New York","Texas")),
+      #textInput("name","Enter your name",""),
+      #textInput("email","Enter your email",""),
+      #radioButtons("gender","Select the gender",list("Male","Female"),""),
+      #sliderInput("year","choose the year:",min=2000,max=2020,value=2018,step=5,animate = T),
+      #selectInput("statenames","Select the state",c("California","New York","Texas")),
       
       br(),
       #input for iris histogram
@@ -34,16 +34,31 @@ ui <- fluidPage(
     #main panel
     mainPanel(
       ("Personal Information"),
-      textOutput("myname"),
-      textOutput("myemail"),
-      textOutput("mygender"),
-      textOutput("myyear"),
-      textOutput("mystate"),
+      #textOutput("myname"),
+      #textOutput("myemail"),
+      #textOutput("mygender"),
+      #textOutput("myyear"),
+      #textOutput("mystate"),
+      
       textOutput("text1"),
       textOutput("text2"),
       textOutput("text3"),
-      plotOutput("myhist")
-              )
-               )
+      
+      
+      
+      #tabset panel
+      tabsetPanel(
+        type="tab",
+        tabPanel(("summary"),tableOutput("summary")),
+        tabPanel("Structure",textOutput("str")),
+        tabPanel("Data"),
+        tabPanel(("Plot"),plotOutput("myhist"),)
+      )
+              ),
+    
+   
+    )
 )
+
+
 
