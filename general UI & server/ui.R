@@ -48,8 +48,8 @@ ui <- fluidPage(
       #tabset panel
       tabsetPanel(
         type="tab",
-        tabPanel(("summary"),tableOutput("summary")),
-        tabPanel("Structure",textOutput("str")),
+        tabPanel(("summary"),verbatimTextOutput("summary")),
+        tabPanel("Structure",verbatimTextOutput("str")),
         tabPanel(("Plot"),plotOutput("myhist")),
         tabPanel(
           ("plot2"),
