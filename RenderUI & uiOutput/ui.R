@@ -16,6 +16,8 @@ ui <- fluidPage(
 
       uiOutput("vy"), #vy is coming from renderUI in server
       
+      #select number of tabs needed
+      numericInput("num","Enter the number of tabs needed",1)
       
       
       #selectInput("varX","select the First(X) variable",c("xx","yy")),
@@ -23,7 +25,11 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      plotOutput("dynamicPlot")
+      plotOutput("dynamicPlot"),
+      
+      #dynamic tabs
+      uiOutput('tabs')
+      
     )
   )
 )

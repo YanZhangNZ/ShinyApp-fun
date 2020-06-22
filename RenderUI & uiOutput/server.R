@@ -33,5 +33,15 @@ server <- function(input,output){
     })
     
     
+    #dynamic tabs
+    output$tabs <- renderUI({
+      
+      #lapply() to apply the tabPanel function on each of tab title to get a list of tabPanels
+      #paste("tab no",1:input$n,sep="-") 
+      Tabs <- lapply(paste("tab no",1:input$num, sep="-"),tabPanel)
+      
+      #call() to pass arguments together instead of one by one
+      do.call(tabsetPanel,Tabs) #pass all argument of Tabs to tabsetPanel
+    })
   
 }
