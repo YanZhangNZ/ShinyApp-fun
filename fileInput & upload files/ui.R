@@ -7,14 +7,22 @@ ui <- fluidPage(
     
     sidebarPanel(
      
-      fileInput("file","Choose File"),
+      fileInput("file","Choose a File"),
       helpText("Default max .file size is 5MB"),
+      
+      #for multiple file
+      fileInput("multifile","Choose Multiple Files",multiple = T),
+      uiOutput("selectfile"),
       
      ),
     
     mainPanel(
       
-      uiOutput('tabs')
+      uiOutput('tabs'),
+      
+      
+      #for multiple file upload
+      uiOutput("multitabs")
     )
   )
 )
