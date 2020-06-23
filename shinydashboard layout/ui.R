@@ -35,6 +35,7 @@ ui <- dashboardPage(
       #grid for body
       tabItem(
         tabName = "box",
+        
         #first row, having two boxes of same height, same width by default
         fluidRow(
           box(
@@ -43,20 +44,27 @@ ui <- dashboardPage(
           ),
           box(
             title = "Box with another plot", 
-            plotlyOutput("plot2",height=250)
+            plotlyOutput("plot2",height=250),
+            status = "danger",
+            solidHeader = T,
+            collapsible = T
           )
         ),
+        
         #second row, of different width
         fluidRow(
           box(
             title="Box with datatable",
             tableOutput("data"),
-            width = 8
+            width = 8,
+            status = "success",
+            background = "red"
           ),
           box(
             title="Box with input widget",
             uiOutput("inputwidget"),
-            width = 4
+            width = 4,
+            background = "black"
           )
        ),
       )
