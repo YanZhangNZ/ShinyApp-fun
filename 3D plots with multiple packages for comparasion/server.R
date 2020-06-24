@@ -12,15 +12,13 @@ server <- function(input,output){
   output$rglPlot <- renderPlot({
     with(
       iris,
-      plot3d(iris[1:150,1:3],type="s"),
-      color = colors
-    )
-  })
+      plot3d(iris[,1:3],type="p",size = 4, col = colors),
+      color = "red"
+    )# try decorate3d, aspected etc.
     
+  })
 
-  
-
-
+  #simple scatterplot3d
     output$irisPlot <- renderPlot({
     scatterplot3d(iris[,1:3],pch = 16, color = colors)
   })
@@ -93,10 +91,12 @@ server <- function(input,output){
                     zlab = 'Conductivity')
     })
     
-  #create a model to fit the plane
-    Mod.1 <- lm(Conduc~Na+pH,data = Soils)
+  
     
   #scatter with linear model
+    #create a model to fit the plane
+    Mod.1 <- lm(Conduc~Na+pH,data = Soils)
+    
     output$linearModel <- renderPlot({
       sp1 <- scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
                            xlab = "Sodium content",
@@ -104,7 +104,13 @@ server <- function(input,output){
                            zlab = 'Conductivity')
       sp1$plane3d(Mod.1,lty.box = "solid")
     })
-   
+    
+    
+   #create a plot with different groups
+    
 
+    
+    #rgl plot
+    
     
 }
