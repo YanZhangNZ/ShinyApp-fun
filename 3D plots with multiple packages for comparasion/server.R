@@ -3,7 +3,7 @@ library(datasets)
 library(rgl)
 library(lattice) #trellis graph/quick 3d
 library(scatterplot3d) #df needs to be converted to be matrix
-library(car)
+library(car) # more intuitive
 
 server <- function(input,output){
 
@@ -110,7 +110,21 @@ server <- function(input,output){
     
 
     
-    #rgl plot
+    #car plot with scatter3d
+    output$carPlot <- renderPlot({
+      scatter3d(
+        Soils$Na,
+        Soils$pH,
+        Soils$Conduc,
+        data = Soils,
+        type="p",
+        size = 4,
+        surface = F,
+        grid = F,
+        ellipsoid = T,
+        axis.col = c("black","black","black")
+      )
+    })
     
     
 }
