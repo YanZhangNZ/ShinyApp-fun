@@ -12,6 +12,7 @@ ui <- fluidPage(
         tabPanel("lattice",plotOutput("quickcarPlot")),
         tabPanel("latticeSet1",plotOutput("set1Plot")),
         tabPanel("latticeSet2",plotOutput("set2Plot")),
+        tabPanel("scatterplot3D",plotOutput("scatterplot3d")),
         tabPanel("rgl",plotOutput("rglPlot"))
       )
     )

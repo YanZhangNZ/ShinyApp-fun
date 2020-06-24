@@ -2,6 +2,7 @@ library(shiny)
 library(datasets)
 library(rgl)
 library(lattice) #trellis graph/quick 3d
+library(scatterplot3d) #df needs to be converted to be matrix
 library(car)
 
 server <- function(input,output){
@@ -38,6 +39,7 @@ server <- function(input,output){
       clip=list(panel="off")
     )
     
+    # first lattice plot
     output$set1Plot <- renderPlot({
       cloud(
         Conduc~Na+pH,
@@ -55,7 +57,7 @@ server <- function(input,output){
       
     })
     
-    
+    #second lattice plot
     output$set2Plot <- renderPlot({
       cloud(
         Conduc~Na+pH,
@@ -72,5 +74,21 @@ server <- function(input,output){
         screen = list(z = 50, x = -50) #
       )
     })
+    
+    #scatterplot3d
+    SoilMatrx <- as.matrix(Soils)
+    xl <- SoilMatrx[,13] # column na -- Sodium content
+    yl <- SoilMatrx[,6] # column pH -- soil pH
+    zl <- SoilMatrx[,14] # Conduc -- conductivity
+    
+    #creating a plot
+    output$scatterplot3d <- renderPlot({
+      scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
+                    xlab = "Sodium content",
+                    ylab = 'Soil pH',
+                    zlab = 'Conductivity'
+                   )
+    })
+
     
 }
