@@ -80,15 +80,31 @@ server <- function(input,output){
     xl <- SoilMatrx[,13] # column na -- Sodium content
     yl <- SoilMatrx[,6] # column pH -- soil pH
     zl <- SoilMatrx[,14] # Conduc -- conductivity
+    sp1 <- scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
+                         xlab = "Sodium content",
+                         ylab = 'Soil pH',
+                         zlab = 'Conductivity')
     
     #creating a plot
     output$scatterplot3d <- renderPlot({
-      scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
+      sp1 <- scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
                     xlab = "Sodium content",
                     ylab = 'Soil pH',
-                    zlab = 'Conductivity'
-                   )
+                    zlab = 'Conductivity')
     })
+    
+  #create a model to fit the plane
+    Mod.1 <- lm(Conduc~Na+pH,data = Soils)
+    
+  #scatter with linear model
+    output$linearModel <- renderPlot({
+      sp1 <- scatterplot3d(xl,yl,zl,highlight.3d = T,pch=16,angle = 50,type="h",
+                           xlab = "Sodium content",
+                           ylab = 'Soil pH',
+                           zlab = 'Conductivity')
+      sp1$plane3d(Mod.1,lty.box = "solid")
+    })
+   
 
     
 }
