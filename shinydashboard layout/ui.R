@@ -14,7 +14,7 @@ ui <- dashboardPage(
         tabName = "chart", 
         icon = icon("line-chart"),
         #downlist of sub menu
-        menuSubItem("chartmenusub1",tabName = "chart1",icon = icon("line-chart")),
+        menuSubItem("infobox",tabName = "infobox",icon = icon("line-chart")),
         menuSubItem("chartmenusub2",tabName = "chart2",icon = icon("line-chart"))
       ),
       menuSubItem("box",tabName = "box",icon = icon("check")),
@@ -34,6 +34,18 @@ ui <- dashboardPage(
       tabItem(
         tabName = "data",
         dataTableOutput("mydatatable")
+      ),
+      tabItem(
+        tabName = "infobox",
+        fluidRow(
+          infoBoxOutput("min_",width = 3),
+          infoBoxOutput("max_",width = 3),
+          infoBoxOutput("median_",width = 3)
+        ),
+        fluidRow(
+          "the 2nd row of infobox"
+        )
+        
       ),
       
       #grid for body

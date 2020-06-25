@@ -38,5 +38,34 @@ server <- function(input,output,session){
       type="histogram"
     )
   })
+  
+  
+  #infobox output
+  output$min_ <- renderInfoBox({
+    infoBox(
+      title = "Minm",
+      value = min(mtcars$mpg),
+      subtitle = "minimum value of mpg",
+      fill = T
+    )
+  })
+  output$max_ <- renderInfoBox({
+    infoBox(
+      title = "Maxm",
+      value = max(mtcars$mpg),
+      subtitle = "maxmum value of mpg",
+      fill = T,
+      color = "green"
+    )
+  })
+  output$median_ <- renderInfoBox({
+    infoBox(
+      title = "Medn",
+      value = median(mtcars$mpg),
+      subtitle = "median value of mpg",
+      fill = T,
+      color = "yellow"
+    )
+  })
       
 }
