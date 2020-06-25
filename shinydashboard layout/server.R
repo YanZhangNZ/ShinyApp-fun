@@ -67,5 +67,37 @@ server <- function(input,output,session){
       color = "yellow"
     )
   })
+  
+  
+  #valuebox output
+  output$min <- renderValueBox({
+    valueBox(
+      value = min(mtcars$mpg),
+      subtitle = "minimum value of mpg",
+      icon("arrow-up"),
+    )
+  })
+  output$max <- renderValueBox({
+    valueBox(
+      value = max(mtcars$mpg),
+      subtitle = "maxmum value of mpg",
+      color = "green"
+    )
+  })
+  output$median <- renderValueBox({
+    valueBox(
+      value = median(mtcars$mpg),
+      subtitle = "median value of mpg",
+      color = "yellow"
+    )
+  })
+  output$mean <- renderValueBox({
+    valueBox(
+      value = mean(mtcars$mpg),
+      subtitle = "mean value of mpg",
+      icon("angle-double-right"),
+      color = "purple"
+    )
+  })
       
 }

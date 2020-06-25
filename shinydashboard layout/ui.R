@@ -15,7 +15,7 @@ ui <- dashboardPage(
         icon = icon("line-chart"),
         #downlist of sub menu
         menuSubItem("infobox",tabName = "infobox",icon = icon("line-chart")),
-        menuSubItem("chartmenusub2",tabName = "chart2",icon = icon("line-chart"))
+        menuSubItem("valuebox",tabName = "valuebox",icon = icon("line-chart"))
       ),
       menuSubItem("box",tabName = "box",icon = icon("check")),
       menuItem("Link",href="https://rstudio.io",icon=icon("code"))
@@ -41,12 +41,17 @@ ui <- dashboardPage(
           infoBoxOutput("min_",width = 3),
           infoBoxOutput("max_",width = 3),
           infoBoxOutput("median_",width = 3)
-        ),
-        fluidRow(
-          "the 2nd row of infobox"
         )
-        
       ),
+      tabItem(
+        tabName = "valuebox",
+          fluidRow(
+            valueBoxOutput("min",width = 3),
+            valueBoxOutput("max",width = 3),
+            valueBoxOutput("median",width = 3),
+            valueBoxOutput("mean",width = 3)
+          )
+        ),
       
       #grid for body
       tabItem(
