@@ -5,7 +5,7 @@ library(shinycssloaders)
 
 ui <- dashboardPage(
   dashboardHeader(
-    title = "this is a demo of dashboard", 
+    title = tags$a(href="https://rstudio.com/", icon("bar-chart"),"this is a demo of dashboard"),
     titleWidth = 500
   ),
   
