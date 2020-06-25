@@ -2,7 +2,6 @@ library(shiny)
 library(shinydashboard)
 library(datasets)
 library(plotly)
-View(iris)
 
 server <- function(input,output,session){
  #output data table for the 2nd row
@@ -63,8 +62,19 @@ server <- function(input,output,session){
       title = "Medn",
       value = median(mtcars$mpg),
       subtitle = "median value of mpg",
+      icon = icon("usd"),
       fill = T,
       color = "yellow"
+    )
+  })
+  output$mean_ <- renderInfoBox({
+    infoBox(
+      title = "Mean",
+      value = mean(mtcars$mpg),
+      icon = icon("usd"),
+      subtitle = tags$a(icon("question-circle"),id="q1"),
+      fill = T,
+      color = "purple"
     )
   })
   
@@ -87,7 +97,7 @@ server <- function(input,output,session){
   output$median <- renderValueBox({
     valueBox(
       value = median(mtcars$mpg),
-      subtitle = "median value of mpg",
+      subtitle = "median value of mpg",,
       color = "yellow"
     )
   })
@@ -99,5 +109,6 @@ server <- function(input,output,session){
       color = "purple"
     )
   })
-      
+
+
 }

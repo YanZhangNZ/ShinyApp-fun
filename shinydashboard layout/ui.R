@@ -2,6 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 library(shinycssloaders)
+library(shinyBS) # for popover
 
 ui <- dashboardPage(
   dashboardHeader(
@@ -33,6 +34,22 @@ ui <- dashboardPage(
     tags$head(
       tags$link(rel="stylesheet", type = "text/css", href = "custom.css")
     ),
+    #popover -- on mouse hover question icon 
+    bsPopover(
+      id = "q1", title = "Mean",
+      content = "Mean value of mpg",
+      trigger = "hover",
+      placement = "right",
+      options = list(container = "body")
+    ),
+    #popover -- on hover the valuebox
+    bsPopover(
+      id = "median_",
+      title = "Median value of mpg",
+      trigger = "hover",
+      placement = "right",
+      options = list(container = "body")
+    ),
     
     tabItems(
       
@@ -52,7 +69,8 @@ ui <- dashboardPage(
         fluidRow(
           infoBoxOutput("min_",width = 3),
           infoBoxOutput("max_",width = 3),
-          infoBoxOutput("median_",width = 3)
+          infoBoxOutput("median_",width = 3),
+          infoBoxOutput("mean_",width = 3)
         )
       ),
       tabItem(

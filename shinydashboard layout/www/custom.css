@@ -5,3 +5,9 @@
   color: white;
   font-weight: bold;
 }
+.info-box-content p >a {
+  text-align: right;
+  vertical-align: top;
+  position: relative;
+  top: -50px;
+}
