@@ -2,11 +2,12 @@ library(shiny)
 library(shinydashboard)
 library(datasets)
 library(plotly)
+View(iris)
 
 server <- function(input,output,session){
  #output data table for the 2nd row
   output$data <- renderTable({
-    head(mtcars)
+    head(iris)
   })
   
   #scatter plot of the 1st row

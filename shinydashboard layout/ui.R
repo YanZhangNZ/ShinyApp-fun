@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(plotly)
+library(shinycssloaders)
 
 ui <- dashboardPage(
   dashboardHeader(title = "this is header", titleWidth = 500),
@@ -22,11 +23,14 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tabItems(
+      
       tabItem(
         tabName = "about",
         p("this is a demo of shinydashboard"),
         p("we will use iris dataset")
       ),
+      
+      
       tabItem(
         tabName = "data",
         dataTableOutput("mydatatable")
@@ -38,17 +42,20 @@ ui <- dashboardPage(
         
         #first row, having two boxes of same height, same width by default
         fluidRow(
-          box(
+           box(
             title = "Box with a plot",
-            plotlyOutput("plot1",height = 250)
+            withSpinner(plotlyOutput("plot1",height = 250))
           ),
-          box(
-            title = "Box with another plot", 
-            plotlyOutput("plot2",height=250),
-            status = "danger",
-            solidHeader = T,
-            collapsible = T
-          )
+         
+         box(
+           title = "Box with another plot", 
+           withSpinner(plotlyOutput("plot2",height=250)),
+           status = "danger",
+           solidHeader = T,
+           collapsible = T
+         )
+
+        
         ),
         
         #second row, of different width
@@ -66,8 +73,9 @@ ui <- dashboardPage(
             width = 4,
             background = "black"
           )
-       ),
+       )
       )
     )
   )
 )
+
