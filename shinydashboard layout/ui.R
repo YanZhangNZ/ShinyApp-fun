@@ -4,7 +4,11 @@ library(plotly)
 library(shinycssloaders)
 
 ui <- dashboardPage(
-  dashboardHeader(title = "this is header", titleWidth = 500),
+  dashboardHeader(
+    title = "this is a demo of dashboard", 
+    titleWidth = 500
+  ),
+  
   dashboardSidebar(
     sidebarMenu(
       menuItem(text="About",tabName="about",icon=icon("clipboard")),
@@ -21,7 +25,12 @@ ui <- dashboardPage(
       menuItem("Link",href="https://rstudio.io",icon=icon("code"))
     )
   ),
+  
   dashboardBody(
+    tags$head(
+      tags$link(rel="stylesheet", type = "text/css", href = "custom.css")
+    ),
+    
     tabItems(
       
       tabItem(
@@ -61,13 +70,15 @@ ui <- dashboardPage(
         fluidRow(
            box(
             title = "Box with a plot",
+            status = "success",
+            solidHeader = T,
             withSpinner(plotlyOutput("plot1",height = 250))
           ),
          
          box(
            title = "Box with another plot", 
            withSpinner(plotlyOutput("plot2",height=250)),
-           status = "danger",
+           status = "success",
            solidHeader = T,
            collapsible = T
          )
@@ -82,13 +93,15 @@ ui <- dashboardPage(
             tableOutput("data"),
             width = 8,
             status = "success",
-            background = "red"
+            solidHeader = T,
+            
           ),
           box(
             title="Box with input widget",
             uiOutput("inputwidget"),
             width = 4,
-            background = "black"
+            solidHeader = T,
+            status = "success"
           )
        )
       )
