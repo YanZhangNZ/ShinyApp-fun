@@ -2,6 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(datasets)
 library(plotly)
+library(scatterplot3d)
 
 server <- function(input,output,session){
  #output data table for the 2nd row
@@ -11,6 +12,7 @@ server <- function(input,output,session){
   
   #scatter plot of the 1st row
   output$plot1 <- renderPlotly({
+    
     plot_ly(
       data=mtcars,
       x=~wt,
@@ -38,6 +40,25 @@ server <- function(input,output,session){
     )
   })
   
+  #3d scatter plot for the 2nd row
+  output$scatter <- renderPlot({
+    scatterplot3d(Soils[,c(13,6,14)],highlight.3d = T,pch=16,angle = 50,type="h",
+                  xlab = "Sodium content",
+                  ylab = 'Soil pH',
+                  zlab = 'Conductivity')
+  })
+  
+  #line chart for the 2nd row
+  output$linechart <- renderPlotly({
+    plot_ly(
+      data=data.frame(Soils), 
+      x = ~Group,  
+      y = ~Na,
+      type = 'scatter', 
+      mode = 'lines', 
+      color = ~Contour , 
+      colors = c("green","darkred","orange")) 
+  })
   
   #infobox output
   output$min_ <- renderInfoBox({
@@ -72,7 +93,7 @@ server <- function(input,output,session){
       title = "Mean",
       value = mean(mtcars$mpg),
       icon = icon("usd"),
-      subtitle = tags$a(icon("question-circle"),id="q1"),
+      subtitle = "Mean value of mpg",
       fill = T,
       color = "purple"
     )
@@ -97,7 +118,7 @@ server <- function(input,output,session){
   output$median <- renderValueBox({
     valueBox(
       value = median(mtcars$mpg),
-      subtitle = "median value of mpg",,
+      subtitle = "median value of mpg",
       color = "yellow"
     )
   })

@@ -76,10 +76,10 @@ ui <- dashboardPage(
       tabItem(
         tabName = "valuebox",
           fluidRow(
-            valueBoxOutput("min",width = 3),
-            valueBoxOutput("max",width = 3),
-            valueBoxOutput("median",width = 3),
-            valueBoxOutput("mean",width = 3)
+            valueBoxOutput("min2",width = 3),
+            valueBoxOutput("max2",width = 3),
+            valueBoxOutput("median2",width = 3),
+            valueBoxOutput("mean2",width = 3)
           )
         ),
       
@@ -87,17 +87,34 @@ ui <- dashboardPage(
       tabItem(
         tabName = "box",
         
+        #first row for highlighters
+
+            fluidRow(
+              valueBoxOutput("min",width = 3),
+              valueBoxOutput("max",width = 3),
+              valueBoxOutput("median",width = 3),
+              #valueBoxOutput("mean",width = 3),
+              box(
+                #title="Box with input widget",
+                uiOutput("inputwidget"),
+                solidHeader = T,
+                status = "success",
+                width = 3,
+                background = "purple"
+              )
+            ),
+
         #first row, having two boxes of same height, same width by default
         fluidRow(
            box(
-            title = "Box with a plot",
+            title = "Box with scatter plot",
             status = "success",
             solidHeader = T,
             withSpinner(plotlyOutput("plot1",height = 250))
           ),
          
          box(
-           title = "Box with another plot", 
+           title = "Box with histogram plot", 
            withSpinner(plotlyOutput("plot2",height=250)),
            status = "success",
            solidHeader = T,
@@ -110,19 +127,17 @@ ui <- dashboardPage(
         #second row, of different width
         fluidRow(
           box(
-            title="Box with datatable",
-            tableOutput("data"),
-            width = 8,
+            title="Box with line chart",
+            plotlyOutput("linechart",height = 280),
             status = "success",
             solidHeader = T,
-            
           ),
           box(
-            title="Box with input widget",
-            uiOutput("inputwidget"),
-            width = 4,
+            title="Box with 3d plot",
+            plotOutput("scatter",height = 280),
             solidHeader = T,
-            status = "success"
+            status = "success",
+            
           )
        )
       )
