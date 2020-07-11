@@ -1,0 +1,10 @@
+name: dashboard_with_external_sql_database
+title:
+username:
+account: statx
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2559352
+bundleId: 3379448
+url: https://statx.shinyapps.io/dashboard_with_external_sql_database/
+when: 1594460117.14682

@@ -12,12 +12,12 @@ library(RODBC)
 dbconnection <- odbcDriverConnect(
   "Driver=SQL Server;
   Server=localhost;
-  Database=MPTT;
+  Database=AdventureWorksDW2019;
   trusted_connection=yes"
 )
 data <- sqlFetch(
   dbconnection, 
-  'student_profile', 
+  'viewinternetsales', 
   colnames=F, 
   rows_at_time=1000
 )
@@ -150,7 +150,15 @@ server <- function(input,output,session){
   
   #external sql database table output
   output$mydatatable <- renderTable({
-    data[1:10,1:10]
+    data[1:50,]
+  })
+  
+  output$datasummary <- renderPrint({
+    summary(data)
+  })
+  
+  output$datastr <- renderPrint({
+    str(data)
   })
 
 }

@@ -6,7 +6,7 @@ library(shinyBS) # for popover
 
 ui <- dashboardPage(
   dashboardHeader(
-    title = tags$a(href="https://rstudio.com/", icon("bar-chart"),"this is a demo of dashboard"),
+    title = tags$a(href="https://rstudio.com/", icon("bar-chart")," Sale and Performance Analysis"),
     titleWidth = 500,
     tags$li(class="dropdown",tags$a(href="https://rstudio.com/",icon("youtube"),"Videos ",target="_blank")),
     tags$li(class="dropdown",tags$a(href="https://rstudio.com/",icon("linkedin"),"Information ")),
@@ -55,14 +55,20 @@ ui <- dashboardPage(
       
       tabItem(
         tabName = "about",
-        p("this is a demo of shinydashboard"),
-        p("we will use multiple internal and external dataset")
+        p("This is a shinydashboard of sales and performance analysis"),
+        p("We will use sales and customer data from data warehouse")
       ),
       
       
       tabItem(
         tabName = "data",
-        tableOutput("mydatatable")
+        tabsetPanel(
+          type="tab",
+          tabPanel(("table"),tableOutput("mydatatable")),
+          tabPanel(("summary"),verbatimTextOutput("datasummary")),
+          tabPanel(("Structure"),verbatimTextOutput("datastr"))
+        )
+        
       ),
       tabItem(
         tabName = "infobox",

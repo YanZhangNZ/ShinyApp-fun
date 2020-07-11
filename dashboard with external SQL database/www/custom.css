@@ -1,0 +1,13 @@
+.skin-blue .main-header .logo:hover {
+  background-color: Orange
+}
+.skin-blue .main-header .logo>a{
+  color: white;
+  font-weight: bold;
+}
+.info-box-content p >a {
+  text-align: right;
+  vertical-align: top;
+  position: relative;
+  top: -50px;
+}
