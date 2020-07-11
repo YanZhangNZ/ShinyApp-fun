@@ -15,19 +15,19 @@ UI implementation: shiny, shinydashboard, visualizations
 3. Dynamic UI Rendering: Please refer to code in folder "RenderUI & uiOutput"
 
 4. 3D plots: Pleaser refer to code in folder " 3D plots with multiple packages for comparasion" which includes:
-### scatterplot3d and linear model
-### lattice and cloud
-### plotly 
-### car plot and scatter3d
-### rgl and plot3d
++ scatterplot3d and linear model
++ lattice and cloud
++ plotly 
++ car plot and scatter3d
++ rgl and plot3d
 
 5.Dashboard implementation: Please refer to code in folder "shinydashboard layout" which includes:
-### grid system: header, sidebar and body
-### custome CSS: customize styling with external CSS file and internal parameters (like solidHeader, status, etc)
-### social media links: LinkedIn, Youtube, Github
-### popOver: interactive effect
-### box system for main panel designing: rows and columns with fluidRow
-### infobox and value box to highlight main KPI
++ mgrid system: header, sidebar and body
++ custome CSS: customize styling with external CSS file and internal parameters (like solidHeader, status, etc)
++ social media links: LinkedIn, Youtube, Github
++ popOver: interactive effect
++ box system for main panel designing: rows and columns with fluidRow
++ infobox and value box to highlight main KPI
 
 
 
